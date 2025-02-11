@@ -1,0 +1,73 @@
+
+    /* Tipografía y diseño general */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h2 {
+    font-weight: 700;
+    color: #495057;
+}
+
+.form-container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón de envío */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Campos del formulario */
+.form-control {
+    border-radius: 0.25rem;
+    border-color: #ced4da;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #80bdff;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #6c757d;
+}
+
+/* Alertas */
+.alert-danger {
+    margin-top: 0.5rem;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .btn-lg {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-container {
+        padding: 1rem;
+    }
+
+    .btn-lg {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+}
