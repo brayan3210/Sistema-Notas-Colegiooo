@@ -237,11 +237,11 @@
         <div class="firmas-container">
             <div>
                 <p class="firma-line">__________________________________</p>
-                <p><strong>MARCELINO ABRIL</strong><br>Rector</p><br>
+                <p><strong>LILIANA MARCELA ABRIL CLAVIJO</strong><br>Rectora</p><br>
             </div><br>
             <div>
                 <p class="firma-line">__________________________________</p>
-                <p><strong>LILIANA MARCELA ABRIL CLAVIJO</strong><br>Directora de Grado</p>
+                <p><strong></strong><br>Directora de Grado</p>
             </div>
         </div>
 

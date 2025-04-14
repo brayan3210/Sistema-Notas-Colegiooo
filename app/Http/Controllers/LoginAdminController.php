@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\PasswordResetMail;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -91,16 +92,19 @@ class LoginAdminController extends Controller
 
         // 4. Enviar correo con la nueva contraseña
         try {
-            Mail::raw(
-                "Hola, $user->name.\n\n".
-                "Tu nueva contraseña de acceso es: $newPassword\n\n".
-                "Recuerda cambiarla después de iniciar sesión.\n".
-                "Saludos,\nColegio Santo Ángel",
-                function ($message) use ($user) {
-                    $message->to($user->email)
-                            ->subject('Recuperación de contraseña - Colegio Santo Ángel');
-                }
-            );
+            /// ESTO ES CUANDO LO ENVIO SIN DISEÑO --- BOORAR LO DE MAIL TO METODO PARA QUE QUEDE NORMAL OTRA VEZ
+            // Mail::raw(
+            //     "Hola, $user->name.\n\n".
+            //     "Tu nueva contraseña de acceso es: $newPassword\n\n".
+            //     "Recuerda cambiarla después de iniciar sesión.\n".
+            //     "Saludos,\nColegio Santo Ángel",
+            //     function ($message) use ($user) {
+            //         $message->to($user->email)
+            //                 ->subject('Recuperación de contraseña - Colegio Santo Ángel');
+            //     }
+            // );
+            Mail::to($user->email)->send(new PasswordResetMail($user, $newPassword));
+
         } catch (\Exception $e) {
             return back()->with('error_forgot', 'Hubo un problema enviando el correo: '.$e->getMessage());
         }

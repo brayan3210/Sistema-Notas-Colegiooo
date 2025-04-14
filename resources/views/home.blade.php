@@ -120,9 +120,7 @@
         <i class="bx bx-menu"></i>
       </div>
     </header>
-    <script src="https://static.elfsight.com/platform/platform.js" async></script>
-    <div class="elfsight-app-e4421340-5ad4-43aa-8c20-483ab158d8e2" data-elfsight-app-lazy></div>
-
+    
     <div class="text">
       <h2>COLEGIO</h2>
       <h3>SANTO ANGEL</h3>
@@ -154,6 +152,8 @@
       </li>
     </ul>
   </section>
+  <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <div class="elfsight-app-e4421340-5ad4-43aa-8c20-483ab158d8e2" data-elfsight-app-lazy></div>
 
   <!-- Menú lateral/desplegable -->
   <div class="menu">

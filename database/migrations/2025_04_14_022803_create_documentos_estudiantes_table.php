@@ -4,13 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentosEstudiantesTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         Schema::create('documentos_estudiantes', function (Blueprint $table) {
-            $table->id('id_documento');
-            $table->unsignedBigInteger('id_estudiante');
+            $table->integer('id_documento', true);
+            $table->integer('id_estudiante')->index('id_estudiante');
             $table->string('fotocopia_registro_civil')->nullable();
             $table->string('fotocopia_carnet_vacunas')->nullable();
             $table->string('fotocopia_carnet_covid')->nullable();
@@ -21,17 +24,19 @@ class CreateDocumentosEstudiantesTable extends Migration
             $table->string('fotocopia_observador_estudiante')->nullable();
             $table->string('boletin_anterior')->nullable();
             $table->string('paz_salvo_anterior')->nullable();
-            $table->string('certificado_grado_quinto')->nullable();  // opcional
+            $table->string('certificado_grado_quinto')->nullable();
             $table->string('retiro_simat')->nullable();
-            $table->string('fotos_3x4')->nullable();  // JPG o PNG
-
-            $table->foreign('id_estudiante')->references('id_estudiante')->on('matriculasestudiantes')->onDelete('cascade');
-            $table->timestamps();
+            $table->string('fotos_3x4')->nullable();
+            $table->timestamp('created_at')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable()->useCurrent();
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('documentos_estudiantes');
     }
-}
+};
