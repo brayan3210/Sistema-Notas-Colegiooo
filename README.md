@@ -50,7 +50,7 @@ Sistema-Notas-Colegiooo es una aplicación web basada en Laravel diseñada para 
 
 ## Purpose and Scope
 
-Esta documentación proporciona una visión completa del sistema de gestión escolar, incluyendo arquitectura, componentes principales, roles de usuarios y patrones de integración. Para detalles de subsistemas específicos, consulte las secciones listadas en el menú de [DeepWiki](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo).
+Esta documentación proporciona una visión completa del sistema de gestión escolar, incluyendo arquitectura, componentes principales, roles de usuarios y patrones de integración. Para detalles de subsistemas específicos, consulte las secciones listadas en el menú de [DeepWiki](https://deepwiki.com/brayan3210/SISTEMAFINALCOLEGIO).
 
 ## System Architecture Overview
 
