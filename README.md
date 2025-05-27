@@ -7,60 +7,154 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📖 Table of Contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* [Overview](#overview)
+* [Purpose and Scope](#purpose-and-scope)
+* [System Architecture Overview](#system-architecture-overview)
+* [Core Architecture Components](#core-architecture-components)
+* [Key System Components](#key-system-components)
+* [User Roles and Access Control](#user-roles-and-access-control)
+* [Academic System Design](#academic-system-design)
+* [Technology Stack](#technology-stack)
+* [Integration Points](#integration-points)
+* [Development Standards](#development-standards)
+* [Modules](#modules)
 
-## Learning Laravel
+  * [Configuration & Setup](#configuration--setup)
+  * [Authentication & User Management](#authentication--user-management)
+  * [Access Control Middleware](#access-control-middleware)
+  * [Student Management System](#student-management-system)
+  * [Student Registration Process](#student-registration-process)
+  * [Parent Data Management](#parent-data-management)
+  * [Document Management](#document-management)
+  * [Academic & Grading Systems](#academic--grading-systems)
+  * [Year-end Processing & Promotion](#year-end-processing--promotion)
+  * [Administrative Functions](#administrative-functions)
+  * [Admin Dashboard & Reports](#admin-dashboard--reports)
+  * [User Administration](#user-administration)
+  * [Financial Management](#financial-management)
+  * [Content & Communication](#content--communication)
+  * [Scheduled Tasks & Automation](#scheduled-tasks--automation)
+  * [Technical Infrastructure](#technical-infrastructure)
+* [Contributing](#contributing)
+* [License](#license)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Overview
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Sistema-Notas-Colegiooo es una aplicación web basada en Laravel diseñada para gestionar operaciones académicas en instituciones educativas. Maneja matrícula de estudiantes, evaluación académica con sistemas duales de calificación, funciones administrativas y procesamiento académico de fin de año.
 
-## Laravel Sponsors
+## Purpose and Scope
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Esta documentación proporciona una visión completa del sistema de gestión escolar, incluyendo arquitectura, componentes principales, roles de usuarios y patrones de integración. Para detalles de subsistemas específicos, consulte las secciones listadas en el menú de [DeepWiki](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo).
 
-### Premium Partners
+## System Architecture Overview
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+El sistema sigue un patrón de arquitectura en capas con separación entre presentación, lógica de negocio y datos, aprovechando el framework Laravel.
+
+## Core Architecture Components
+
+* **Controllers:** Gestión de lógica de negocio.
+* **Models:** Definición de entidades y relaciones.
+* **Views (Blade):** Interfaces de usuario.
+* **Middlewares:** Control de acceso y seguridad.
+* **Console Commands:** Tareas programadas y mantenimiento.
+
+## Key System Components
+
+| Componente               | Propósito                                   | Funcionalidades Clave                                         |
+| ------------------------ | ------------------------------------------- | ------------------------------------------------------------- |
+| Authentication System    | Control de acceso y gestión de roles        | Sistema de roles de tres niveles (Admin, Profesor, Usuario)   |
+| Student Management       | Matrícula y gestión de datos de estudiantes | Registro, datos de padres, manejo de documentos               |
+| Academic System          | Gestión de calificaciones                   | Sistemas duales de calificación según nivel de grado          |
+| Administrative Functions | Operaciones y reportes escolares            | Dashboard, administración de usuarios, seguimiento financiero |
+| Document Management      | Almacenamiento y organización de archivos   | Archivos de evidencia, certificados, reportes                 |
+| Automation Engine        | Procesos programados                        | Procesamiento de fin de año, limpieza de datos                |
+
+## User Roles and Access Control
+
+Se implementa un modelo de control de acceso basado en roles con tres tipos de usuario:
+
+* **Admin (1):** Acceso completo.
+* **Profesor (2):** Gestión de notas y visualización de datos limitados.
+* **Usuario (0):** Visualización básica.
+
+### Access Control Matrix
+
+| Función                      | Admin | Profesor |  Usuario |
+| ---------------------------- | :---: | :------: | :------: |
+| Gestión de usuarios          |   ✓   |     ✗    |     ✗    |
+| Registro de notas            |   ✓   |     ✓    |     ✗    |
+| Visualización de estudiantes |   ✓   |     ✓    | Limitado |
+| Generación de reportes       |   ✓   | Limitado |     ✗    |
+| Configuración del sistema    |   ✓   |     ✗    |     ✗    |
+| Gestión de evidencias        |   ✓   |     ✓    |     ✗    |
+
+## Academic System Design
+
+Se implementa un enfoque dual de evaluación:
+
+1. **Sistema de Calificación Estándar:** Para grados 4–9, evaluaciones numéricas.
+2. **Evaluación Basada en Dimensiones:** Para grados 1–3, evaluación por competencias.
+
+Ambos sistemas integran un procesamiento automático de promoción al 31 de diciembre de cada año.
+
+## Technology Stack
+
+| Capa           | Tecnología        | Propósito                                   |
+| -------------- | ----------------- | ------------------------------------------- |
+| Framework      | Laravel           | Estructura MVC y lógica de aplicación       |
+| Frontend       | Blade Templates   | Renderizado de vistas del lado del servidor |
+| Base de datos  | MySQL/PostgreSQL  | Almacenamiento de datos académicos          |
+| Almacenamiento | Laravel Storage   | Gestión de documentos y reportes            |
+| Tareas         | Laravel Scheduler | Operaciones automatizadas                   |
+| Autenticación  | Laravel Auth      | Manejo de sesiones y seguridad              |
+
+## Integration Points
+
+* **Email System:** Notificaciones y restablecimiento de contraseñas.
+* **File Storage:** Almacenamiento público de documentos.
+* **PDF Generation:** Generación automática de certificados y reportes.
+* **Scheduled Operations:** Tareas diarias y anuales automatizadas.
+
+## Development Standards
+
+* **MVC Architecture**: Separación clara de responsabilidades.
+* **Middlewares**: Aplicación de políticas de seguridad.
+* **Artisan Commands**: Comandos personalizados para tareas.
+* **Eloquent ORM**: Interacciones con la base de datos.
+* **Blade Templating**: Plantillas reutilizables para vistas.
+
+## Modules
+
+Para más detalles de configuración y uso de cada módulo, consulte la documentación completa en DeepWiki:
+
+* [Configuration & Setup](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#6-Configuration-Setup)
+* [Authentication & User Management](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#7-Authentication-User-Management)
+* [Access Control Middleware](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#8-Access-Control-Middleware)
+* [Student Management System](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#9-Student-Management-System)
+* [Student Registration Process](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#10-Student-Registration-Process)
+* [Parent Data Management](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#11-Parent-Data-Management)
+* [Document Management](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#12-Document-Management)
+* [Academic & Grading Systems](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#13-Academic-System)
+* [Year-end Processing & Promotion](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#15-Year-end-Processing-Promotion)
+* [Administrative Functions](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#16-Administrative-Functions)
+* [Admin Dashboard & Reports](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#17-Admin-Dashboard-Reports)
+* [User Administration](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#18-User-Administration)
+* [Financial Management](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#19-Financial-Management)
+* [Content & Communication](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#20-Content-Communication)
+* [Scheduled Tasks & Automation](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#21-Scheduled-Tasks-Automation)
+* [Technical Infrastructure](https://deepwiki.com/brayan3210/Sistema-Notas-Colegiooo#22-Technical-Infrastructure)
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+¡Gracias por contribuir! Por favor, revise la guía de contribución en la documentación oficial de Laravel.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Este proyecto está licenciado bajo la [MIT License](https://opensource.org/licenses/MIT).
+
