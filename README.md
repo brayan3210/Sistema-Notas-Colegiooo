@@ -1,4 +1,4 @@
-# Sistema Final Colegio
+# Sistema Notas Colegio San
 
 <p align="center">
   <a href="https://github.com/brayan3210/Sistema-Notas-Colegiooo">
@@ -14,7 +14,7 @@
 
 ## 📋 Descripción
 
-**Sistema Final Colegio** es una plataforma web desarrollada en Laravel que automatiza la gestión académica y administrativa de un colegio. Permite el registro de estudiantes, manejo de notas, generación de reportes, control de matrícula y pensión, gestión de documentos y mucho más.
+**Sistema Notas Colegio San** es una plataforma web desarrollada en Laravel que automatiza la gestión académica y administrativa de un colegio. Permite el registro de estudiantes, manejo de notas, generación de reportes, control de matrícula y pensión, gestión de documentos y mucho más.
 
 Toda la documentación detallada, incluyendo diagramas, flujos y especificaciones de cada módulo, está disponible en DeepWiki:
 
